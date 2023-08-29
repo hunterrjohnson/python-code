@@ -1,5 +1,4 @@
 # Function to check missingness in data frame and return summary data frame
-
 def check_missing(dat):
     
     # Function to count missing and get proportion missing
@@ -19,3 +18,9 @@ def check_missing(dat):
     result_dats = [null_check(dat[column]) for column in dat.columns] # Apply null_check to each column
     final_result = pd.concat(result_dats, ignore_index = True) # Concatenate results
     return final_result
+
+# Function to get first non-missing element of each column
+def get_example(dat):
+    dat_ex = dat.apply(lambda col: col[col.first_valid_index()]).to_frame().reset_index()
+    dat_ex.columns = ['VARIABLE','VALUE']
+    return dat_ex
