@@ -3,8 +3,8 @@ def check_missing(dat):
     
     # Function to count missing and get proportion missing
     def null_check(var):
-        missing_count = var.isin(['','NULL']).sum() + var.isna().sum()
         total_rows = len(var)
+        missing_count = var.isna().sum() + var.isin(['','NULL','Null','null','NA','na']).sum()
         missing_proportion = missing_count / total_rows
         
         result_dat = pd.DataFrame({
